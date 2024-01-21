@@ -12,7 +12,7 @@ import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.SwerveSubsystem;
 
 public class RobotContainer {
-  private final XboxController stick = new XboxController(Constants.OperatorConstants.kDriverControllerPort);
+  private final XboxController stick = new XboxController(Constants.OIConstants.kDriverControllerPort);
   
   private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
   private final Shooter shooter = new Shooter();
