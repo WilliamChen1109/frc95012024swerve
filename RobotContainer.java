@@ -42,22 +42,22 @@ public class RobotContainer {
     return new SequentialCommandGroup(
       new ShooterCmd(shooter, 0.7).withTimeout(0.5),
       new ParallelCommandGroup(
-        new SwerveJoystickCmd(swerveSubsystem, () -> 0d, () -> -0.5*1.25, () -> 0d, () -> false).withTimeout(1),
+        new SwerveJoystickCmd(swerveSubsystem, () -> 0d, () -> -0.5/1.25, () -> 0d, () -> false).withTimeout(1),
         new IntakeCmd(intake, 0.4, 0.2).withTimeout(0.8)
       ),
       new ParallelCommandGroup(
-        new SwerveJoystickCmd(swerveSubsystem, () -> 0d, () -> 1*1.25, () -> 0d, () -> false).withTimeout(1),
+        new SwerveJoystickCmd(swerveSubsystem, () -> 0d, () -> 1/1.25, () -> 0d, () -> false).withTimeout(1),
         new IntakeCmd(intake, 0d, -0.2).withTimeout(0.8)
       ),
       new ShooterCmd(shooter, 0.8).withTimeout(0.8),
       new SwerveJoystickCmd(swerveSubsystem, () -> 0d, () -> 0.5, () -> 0d, () -> false).withTimeout(1),
       new SwerveJoystickCmd(swerveSubsystem, () -> 0d, () -> 0d, () -> -0.3, () -> false).withTimeout(0.3),
       new ParallelCommandGroup(
-        new SwerveJoystickCmd(swerveSubsystem, () -> 0d, () -> -0.5*1.25, () -> 0d, () -> false).withTimeout(2.5),
+        new SwerveJoystickCmd(swerveSubsystem, () -> 0d, () -> -0.5/1.25, () -> 0d, () -> false).withTimeout(2.5),
         new IntakeCmd(intake, 0.4, 0.2).withTimeout(0.8)
       ),
       new ParallelCommandGroup(
-        new SwerveJoystickCmd(swerveSubsystem, () -> 0d, () -> 1*1.25, () -> 0d, () -> false).withTimeout(1.5),
+        new SwerveJoystickCmd(swerveSubsystem, () -> 0d, () -> 1/1.25, () -> 0d, () -> false).withTimeout(1.5),
         new IntakeCmd(intake, 0d, -0.2).withTimeout(0.8)
       ),
       new SwerveJoystickCmd(swerveSubsystem, () -> 0d, () -> 0d, () -> 0.3, () -> false).withTimeout(0.3),
