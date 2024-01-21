@@ -1,37 +1,35 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shooter;
 
-public class IntakeCmd extends Command{
-    private Intake intake;
-    private double intakeSpeed, intakeCtrlSpeed;
+public class ShooterCmd extends Command{
+    private Shooter shooter;
+    private double speed;
 
-    public IntakeCmd(Intake intake, double intakeSpeed, int intakeCtrlSpeed){
-        this.intake = intake;
-        this.intakeSpeed = intakeSpeed;
-        this.intakeCtrlSpeed = intakeCtrlSpeed;
+    public ShooterCmd(Shooter shooter, double speed){
+        this.shooter = shooter;
+        this.speed = speed;
 
-        addRequirements(intake);
+        addRequirements(shooter);
     }
 
     //初始化(進到Command會跑一次)
     @Override
     public void initialize(){
-        System.out.println("IntakeCmd Started!");
+        System.out.println("ShooterCmd Started!");
     }
 
     //循環(進到Command後循環)
     @Override
     public void execute(){
-        intake.setIntakeMotor(this.intakeSpeed);
-        intake.setIntakeCtrlMotor(this.intakeCtrlSpeed);
+        shooter.set(this.speed);
     }
 
     @Override
     public void end(boolean interrupted){
-        intake.stopMotor();
-        System.out.println("IntakeCmd finished!");
+        shooter.stopMotor();
+        System.out.println("ShooterCmd finished!");
     }
 
     @Override
