@@ -95,9 +95,9 @@ public class SwerveSubsystem extends SubsystemBase{
         };
     }
 
-    //
+    //校正Odometry
     public void resetOdometry(Pose2d pose){
-        odometer.resetPosition(getRotation2d(), null, pose);
+        odometer.resetPosition(getRotation2d(), getModulePositions(), pose);
     }
 
     public void stopModules(){
@@ -107,12 +107,12 @@ public class SwerveSubsystem extends SubsystemBase{
         backRight.stop();
     }
 
-    public void setModuleStates(SwerveModuleState[] desiStates){
-        SwerveDriveKinematics.desaturateWheelSpeeds(desiStates, 1);
-        frontLeft.setDesiredState(desiStates[0]);
-        frontRight.setDesiredState(desiStates[1]);
-        backLeft.setDesiredState(desiStates[2]);
-        backRight.setDesiredState(desiStates[3]);
+    public void setModuleStates(SwerveModuleState[] desireStates){
+        SwerveDriveKinematics.desaturateWheelSpeeds(desireStates, 1);
+        frontLeft.setDesiredState(desireStates[0]);
+        frontRight.setDesiredState(desireStates[1]);
+        backLeft.setDesiredState(desireStates[2]);
+        backRight.setDesiredState(desireStates[3]);
     }
 
     @Override
@@ -122,5 +122,14 @@ public class SwerveSubsystem extends SubsystemBase{
 
     public void setPose(Pose2d pose){
         odometer.resetPosition(getRotation2d(), getModulePositions(), pose);
+    }
+
+    public double[] getModuleAbsoluteEncoderRad(){
+        return new double[]{
+            frontLeft.getAbsoluteEncoderRad(),
+            frontRight.getAbsoluteEncoderRad(),
+            backLeft.getAbsoluteEncoderRad(),
+            backRight.getAbsoluteEncoderRad()
+        };
     }
 }
