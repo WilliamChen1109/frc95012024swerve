@@ -1,8 +1,8 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.hardware.TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -15,11 +15,11 @@ import frc.robot.Constants;
 
 public class SwerveModule {
     // 宣告馬達
-    private final CANSparkMax driveMotor;
+    private final TalonFX driveMotor;
     private final CANSparkMax turningMotor;
 
     // 宣告Encoder
-    private final RelativeEncoder driveEncoder;
+    //private final RelativeEncoder driveEncoder;
     private final RelativeEncoder turningEncoder;
 
     // 宣告PID控制器
@@ -32,19 +32,31 @@ public class SwerveModule {
     private final boolean absoluteEncoderReversed;
     private final double absoluteEncoderOffsetRad;
 
+
+    /**
+     * @param driveMotorId
+     * @param turningMotorId
+     * @param driveMotorReversed
+     * @param turningMotorReversed
+     * @param absoluteEncoderId
+     * @param absoluteEncoderOffset
+     * @param absoluteEncoderReversed
+     */
+
     public SwerveModule(int driveMotorId, int turningMotorId, boolean driveMotorReversed, boolean turningMotorReversed, int absoluteEncoderId, double absoluteEncoderOffset, boolean absoluteEncoderReversed){
         // $
         this.absoluteEncoderReversed = absoluteEncoderReversed;
         this.absoluteEncoderOffsetRad = absoluteEncoderOffset;
 
-        driveMotor = new CANSparkMax(driveMotorId, MotorType.kBrushless);
-        turningMotor = new CANSparkMax(turningMotorId, MotorType.kBrushless);
+        driveMotor = new TalonFX(driveMotorId);
+        turningMotor = new CANSparkMax(absoluteEncoderId, com.revrobotics.CANSparkLowLevel.MotorType.kBrushless);
 
         // $
         driveMotor.setInverted(driveMotorReversed);
         turningMotor.setInverted(turningMotorReversed);
 
-        driveEncoder = driveMotor.getEncoder();
+        //driveMotor.getPosition();
+        //driveMotor.getVelocity();
         turningEncoder = turningMotor.getEncoder();
 
         turningPidController = new PIDController(Constants.ModuleConstants.kPTurning, 0, 0);
@@ -52,8 +64,8 @@ public class SwerveModule {
 
         absoluteEncoder = new AnalogInput(absoluteEncoderId);
 
-        driveEncoder.setPositionConversionFactor(Constants.ModuleConstants.kDriveEncoderRot2Meter);
-        driveEncoder.setVelocityConversionFactor(Constants.ModuleConstants.kDriveEncoderRot2MeterPerSec);
+        //driveEncoder.setPositionConversionFactor(Constants.ModuleConstants.kDriveEncoderRot2Meter);
+        //driveEncoder.setVelocityConversionFactor(Constants.ModuleConstants.kDriveEncoderRot2MeterPerSec);
         turningEncoder.setPositionConversionFactor(Constants.ModuleConstants.kTurningEncoderRot2Rad);
         turningEncoder.setVelocityConversionFactor(Constants.ModuleConstants.kTurningEncoderRot2RadPerSec);
 
@@ -61,7 +73,8 @@ public class SwerveModule {
     }
 
     public double getDrivePosition(){
-        return driveEncoder.getPosition();
+        return driveMotor.getPosition().getValueAsDouble()*Constants.ModuleConstants.kDriveEncoderRot2Meter;
+        // return driveEncoder.getPosition();
     }
 
     public double getTurningPosition(){
@@ -69,7 +82,8 @@ public class SwerveModule {
     }
 
     public double getDriveVelocity(){
-        return driveEncoder.getVelocity();
+        return driveMotor.getVelocity().getValueAsDouble()*Constants.ModuleConstants.kDriveEncoderRot2MeterPerSec;
+        // return driveEncoder.getVelocity();
     }
 
     public double getTurningVelocity(){
@@ -84,7 +98,7 @@ public class SwerveModule {
     }
 
     public void resetEncoders(){
-        driveEncoder.setPosition(0);
+        //driveEncoder.setPosition(0);
         turningEncoder.setPosition(getAbsoluteEncoderRad());
     }
 
@@ -111,7 +125,7 @@ public class SwerveModule {
 
     public SwerveModulePosition getPosition(){
         return new SwerveModulePosition(
-            driveEncoder.getPosition(),
+            driveMotor.getPosition().getValueAsDouble(),
             new Rotation2d(getTurningPosition())
         );
     }
