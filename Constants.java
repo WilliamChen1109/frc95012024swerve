@@ -4,24 +4,6 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 
 public final class Constants {
-  public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
-  }
-
-  public static class ChassisConstants{
-    public static final int kLeft1MotorID = 1;
-    public static final int kLeft2MotorID = 2;
-    public static final int kRight1MotorID = 3;
-    public static final int kRight2MotorID = 4;
-
-    public static final double kDrivingSpeed = 0.6;
-  }
-
-  public static class ElevatorConstants{
-    public static final int kElevatorLeftMotorID = 4;
-    public static final int kElevatorRightMotorID = 5;
-  }
-
   public static final class OIConstants {
     public static final int kDriverControllerPort = 0;
 
@@ -113,5 +95,14 @@ public final class Constants {
     public static final double kTeleDriveMaxAngularSpeedRadiansPerSecond = kPhysicalMaxAngularSpeedRadiansPerSecond / 4;
     public static final double kTeleDriveMaxAccelerationUnitsPerSecond = 3;
     public static final double kTeleDriveMaxAngularAccelerationUnitsPerSecond = 3;
+  }
+
+  public static class ShooterConstants{
+    public static final int kShooterMotorPort = 9;
+  }
+
+  public static class IntakeConstants{
+    public static final int kIntakeMotorPort = 10;
+    public static final int kIntakeCtrlMotorPort = 11;
   }
 }
