@@ -9,10 +9,10 @@ public final class Constants {
   }
 
   public static class ChassisConstants{
-    public static final int kLeft1MotorID = 0;
-    public static final int kLeft2MotorID = 1;
-    public static final int kRight1MotorID = 2;
-    public static final int kRight2MotorID = 3;
+    public static final int kLeft1MotorID = 1;
+    public static final int kLeft2MotorID = 2;
+    public static final int kRight1MotorID = 3;
+    public static final int kRight2MotorID = 4;
 
     public static final double kDrivingSpeed = 0.6;
   }
@@ -35,12 +35,12 @@ public final class Constants {
 
   public static class ModuleConstants{
     // 輪子轉向的kP常數
-    public static final double kPTurning = 0.5;
+    public static final double kPTurning = 0.2;
 
     // 輪子單位換算
     public static final double kWheelDiameterMeters = 0.0992;
     public static final double kDriveMotorGearRatio = 1 / 5.95;
-    public static final double kTurningMotorGearRatio = 1 / 42;
+    public static final double kTurningMotorGearRatio = 1 / 21;
 
     public static final double kDriveEncoderRot2Meter = kDriveMotorGearRatio * Math.PI * kWheelDiameterMeters; // Position
     public static final double kDriveEncoderRot2MeterPerSec = kDriveEncoderRot2Meter / 60; // Velocity
@@ -49,22 +49,23 @@ public final class Constants {
   }
 
   public static class DriveConstants{
+    // 記得改
     public static final double Length = 0; // inch
     public static final double Width = 0;  // inch
 
     public static final double kPhysicalMaxSpeedMeterPerSecond = 5;
 
     // 四顆輪子的DriveMotorID
-    public static final int kFrontLeftDriveMotorPort = 8;
-    public static final int kBackLeftDriveMotorPort = 2;
-    public static final int kFrontRightDriveMotorPort = 6;
-    public static final int kBackRightDriveMotorPort = 4;
+    public static final int kFrontLeftDriveMotorPort = 5;
+    public static final int kBackLeftDriveMotorPort = 6;
+    public static final int kFrontRightDriveMotorPort = 7;
+    public static final int kBackRightDriveMotorPort = 8;
 
     // 四顆輪子的TurningMotorID
-    public static final int kFrontLeftTurningMotorPort = 7;
-    public static final int kBackLeftTurningMotorPort = 1;
-    public static final int kFrontRightTurningMotorPort = 5;
-    public static final int kBackRightTurningMotorPort = 3;
+    public static final int kFrontLeftTurningMotorPort = 1;
+    public static final int kBackLeftTurningMotorPort = 2;
+    public static final int kFrontRightTurningMotorPort = 3;
+    public static final int kBackRightTurningMotorPort = 4;
 
     // 四個輪子的TurningEncoder要不要反轉
     public static final boolean kFrontLeftTurningEncoderReversed = true;
@@ -103,10 +104,12 @@ public final class Constants {
       new Translation2d(-Length/2, -Width/2)
     );
 
+    // 調底盤速度
     public static final double kPhysicalMaxSpeedMetersPerSecond = 5;
+    
     public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 2 * 2 * Math.PI;
 
-    public static final double kTeleDriveMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond / 4;
+    public static final double kTeleDriveMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond / 4 * 48.76;
     public static final double kTeleDriveMaxAngularSpeedRadiansPerSecond = kPhysicalMaxAngularSpeedRadiansPerSecond / 4;
     public static final double kTeleDriveMaxAccelerationUnitsPerSecond = 3;
     public static final double kTeleDriveMaxAngularAccelerationUnitsPerSecond = 3;
